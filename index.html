@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="./js/aframe.min.js"></script>
+	<script src="./js/sweetalert2@11.js"></script>
+  </head>
+
+  <body>
+    <a-scene cursor="rayOrigin: mouse">
+
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9" onclick="showDialogbox('box')"></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E" onclick="showDialogbox('sphere')"></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" onclick="showDialogbox('cylinder')"></a-cylinder>
+
+	  <a-gltf-model src="./shark/scene.gltf" onclick="showDialogbox(0)"></a-gltf-model>
+	  
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+
+  <script>
+	let levelData = [
+		{word: "shark", phonetics: "/ʃɑːrk/", translation: "کوسه", synonym: "big fish", example: "I saw a shark the other day and it was nice"}
+	];
+
+	function showDialogbox(item) {
+		Swal.fire({
+			title: '<strong>HTML <u>example</u></strong>',
+			icon: 'info',
+			html:
+				'You can use <b>bold text</b>, ' +
+				'<a href="//sweetalert2.github.io">links</a> ' +
+				'and other HTML tags',
+			showCloseButton: true,
+			showCancelButton: true,
+			focusConfirm: false,
+			confirmButtonText:
+				'<i class="fa fa-thumbs-up"></i> Great!',
+			confirmButtonAriaLabel: 'Thumbs up, great!',
+			cancelButtonText:
+				'<i class="fa fa-thumbs-down"></i>',
+			cancelButtonAriaLabel: 'Thumbs down'
+		})
+	}
+
+	function pronounce(word) {
+		let utterance = new SpeechSynthesisUtterance();
+		utterance.text = word;
+  		utterance.voice = window.speechSynthesis.getVoices()[1];
+  		window.speechSynthesis.speak(utterance);
+	}
+  </script>
+</html>
